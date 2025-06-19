@@ -5,7 +5,6 @@ import { InventoryStockInDto } from '@libs/dao/inventory/dto/inventory-stock-in.
 import { ProductRepository } from '@libs/dao/product/product.repository';
 import { ServerErrorException } from '@libs/common/exception/server-error.exception';
 import { INTERNAL_ERROR_CODE } from '@libs/common/constants/internal-error-code.constants';
-import { ProductProvider } from '@libs/common/provider/product.provider';
 import { Inventory } from '@libs/dao/inventory/inventory.entity';
 import { INVENTORY_TYPE } from '@libs/common/constants/inventory-type.constants';
 import { InventoryStockOutDto } from '@libs/dao/inventory/dto/inventory-stock-out.dto';
@@ -22,8 +21,6 @@ export class InventoryService {
     private readonly inventoryRepository: InventoryRepository,
     @Inject(ProductRepository)
     private readonly productRepository: ProductRepository,
-
-    private readonly productProvider: ProductProvider,
   ) {}
 
   /**
@@ -49,10 +46,11 @@ export class InventoryService {
       expirationDate: expirationDate ? new Date(expirationDate) : null,
     });
 
-    // 입고 시 수량만큼 product 추가
-    await this.productProvider.addProductStock(product, quantity);
+    // 입고 시 수량만큼 product 추가 & inventory 에 update
+    product.stock += quantity;
 
     await this.inventoryRepository.insert(inventory);
+    await this.productRepository.updateById(product.id, product);
 
     return InventoryResponseOutDto.of(inventory);
   }
@@ -75,10 +73,11 @@ export class InventoryService {
       type: INVENTORY_TYPE.OUT,
     });
 
-    // 입고 시 수량만큼 product 제거 & inventory 에 저장
-    await this.productProvider.subProductStock(product, quantity);
+    // 입고 시 수량만큼 product 제거 & inventory 에 update
+    product.stock -= quantity;
 
     await this.inventoryRepository.insert(inventory);
+    await this.productRepository.updateById(product.id, product);
 
     return InventoryResponseOutDto.of(inventory);
   }

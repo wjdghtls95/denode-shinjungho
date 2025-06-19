@@ -27,10 +27,10 @@ export class ProductController {
 
   @Get()
   @ApiResponseEntity({ summary: '보유 재고 제품 목록 조회' })
-  async getStockedProducts(
+  async getProducts(
     @Query() paginationQueryDto: PaginationQueryDto,
   ): Promise<ResponseEntity<PaginatedResultDto<ProductOutDto>>> {
-    const pageResult = await this.productService.getPagedStockedProducts(
+    const pageResult = await this.productService.getProducts(
       paginationQueryDto,
     );
 

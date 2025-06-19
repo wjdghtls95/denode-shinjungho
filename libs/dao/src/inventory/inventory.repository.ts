@@ -7,6 +7,15 @@ import { InventoryHistoryInDto } from '@libs/dao/inventory/dto/inventory-history
 @EntityRepository(Inventory)
 export class InventoryRepository extends AbstractRepository<Inventory> {
   /**
+   * 제품 아이디로 조회
+   */
+  async findByProductId(productId: number): Promise<Inventory[]> {
+    return this.getQueryBuilder
+      .where(`${this.alias}.productId=:productId`, { productId: productId })
+      .getMany();
+  }
+
+  /**
    * 입고 / 출고 기준 및 조건별 재고 히스토리 조회
    */
   async findByInventoryType(

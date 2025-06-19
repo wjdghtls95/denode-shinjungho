@@ -17,9 +17,7 @@ import { ProductModule } from '@libs/dao/product/product.module';
 import { ProductController } from './product/product.controller';
 import { ProductService } from './product/product.service';
 import { TransactionInterceptor } from '@libs/common/interceptor/transaction.interceptor';
-import { Inventory } from '@libs/dao/inventory/inventory.entity';
 import { InventoryModule } from '@libs/dao/inventory/inventory.module';
-import { ProductProvider } from '@libs/common/provider/product.provider';
 import { InventoryService } from './inventory/inventory.service';
 import { InventoryController } from './inventory/inventory.controller';
 
@@ -71,9 +69,6 @@ import { InventoryController } from './inventory/inventory.controller';
     AuthService,
     ProductService,
     InventoryService,
-
-    // provider
-    ProductProvider,
   ],
 })
 export class ApiModule {}

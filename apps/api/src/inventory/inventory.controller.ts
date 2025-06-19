@@ -49,4 +49,15 @@ export class InventoryController {
 
     return ResponseEntity.ok().body(inventoryHistoryOutDto);
   }
+
+  @Post('in/error-test')
+  @ApiResponseEntity({ summary: '트랜잭션 테스트 - 강제 에러 발생' })
+  async stockInWithError(
+    @Body() dto: InventoryStockInDto,
+  ): Promise<ResponseEntity<unknown>> {
+    await this.inventoryService.inventoryStockIn(dto);
+
+    // 트랜잭션 내에서 강제 예외 발생
+    throw new Error('강제 에러로 트랜잭션 롤백 확인');
+  }
 }

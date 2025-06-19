@@ -19,10 +19,10 @@ export class ProductService {
    * 제품 등록
    */
   async create(productInDto: ProductInDto): Promise<ProductOutDto> {
-    const { id, name, desc } = productInDto;
+    const { name, desc } = productInDto;
 
     // 이미 등록된 제품인지 확인
-    const isExisted = await this.productRepository.findById(id);
+    const isExisted = await this.productRepository.findByName(name);
 
     if (isExisted) {
       throw new ServerErrorException(
@@ -43,7 +43,7 @@ export class ProductService {
   /**
    * 보유 재고 요청한 개수별 페이지 조회
    */
-  async getPagedStockedProducts(
+  async getProducts(
     paginationQueryDto: PaginationQueryDto,
   ): Promise<PaginatedResultDto<ProductOutDto>> {
     const { page, limit } = paginationQueryDto;
