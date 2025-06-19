@@ -93,23 +93,24 @@ pnpm install
 npm run start
 ```
 
-* 실행 주소: `http://localhost:3000`
+* 서버 주소: `http://localhost:3000`
 
 ---
 
 #### 6. Swagger 접속 & API 테스트
 
-* Swagger UI: [http://localhost:3000/api](http://localhost:3000/api)
+* Swagger UI: [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
 
 ##### 🔄 테스트 순서 예시
 
-1. **회원가입** → `/user/register`
-2. **로그인 및 토큰 발급** → `/auth/login` → 받은 accessToken을 Swagger 우측 상단 🔒 Authorize에 등록 (앞뒤 `"` 제거 필요)
-3. **제품 등록** → `/products`
-4. **재고 입고** → `/inventories/in`
-5. **재고 출고** → `/inventories/out`
-6. **보유 재고 목록** → `/products/stocked`
-7. **입출고 이력 조회** → `/inventories/history`
+1. **회원가입** → `POST /user/register`
+2. **로그인 및 토큰 발급** → `POST /auth/login` → 받은 accessToken을 Swagger 우측 상단 🔒 Authorize에 등록 (앞뒤 `"` 제거 필요)
+3. **Authorize 확인** → `GET /users/me`
+3. **제품 등록** → `POST /products`
+4. **재고 입고** → `POST /inventories/in`
+5. **재고 출고** → `POST /inventories/out`
+6. **보유 재고 목록** → `POST /products`
+7. **입출고 이력 조회** → `GET /inventories/history`
 
 ---
 
