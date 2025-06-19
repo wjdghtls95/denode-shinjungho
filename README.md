@@ -114,13 +114,17 @@ npm run start
 
 ---
 
-#### 7. 테스트 코드 실행 (선택)
+#### 7. 테스트 코드 실행
 
 ```bash
 npm run test
 ```
 
-#### 7. Docker 컨테이너 종료 (선택)
+* 단위 / 통합 테스트를 실행합니다.
+* DB가 실행 중이어야 하며 `.env` 파일도 정상 구성되어 있어야 합니다.
+* `api/test/**/*.spec.ts`에 작성된 테스트 코드들이 실행됩니다.
+
+#### 8. Docker 컨테이너 종료
 
 ```bash
 docker-compose down
