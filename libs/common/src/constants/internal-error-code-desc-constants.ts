@@ -6,8 +6,6 @@ export const INTERNAL_ERROR_CODE_DESC = {
   [e.USER_NOT_FOUND]: '유저 찾을 수 없음',
   [e.USER_PASSWORD_INVALID]: '유저 비밀번호 유효하지 않음',
 
-  // AUTH
-
   // PRODUCT
   [e.PRODUCT_ALREADY_CREATED]: '이미 등록된 제품',
   [e.PRODUCT_NOT_FOUND]: '제품을 찾을 수 없음',

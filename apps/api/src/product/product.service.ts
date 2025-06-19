@@ -17,10 +17,9 @@ export class ProductService {
 
   /**
    * 제품 등록
-   * TODO.. indto 에서 name 으로 받아서 등록 || id 로 받아서 등록
    */
   async create(productInDto: ProductInDto): Promise<ProductOutDto> {
-    const { id, name, stock, desc } = productInDto;
+    const { id, name, desc } = productInDto;
 
     // 이미 등록된 제품인지 확인
     const isExisted = await this.productRepository.findById(id);
@@ -33,7 +32,6 @@ export class ProductService {
 
     const product = Product.create({
       name: name,
-      stock: stock,
       desc: desc,
     });
 
