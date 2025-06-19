@@ -114,6 +114,12 @@ npm run start
 
 ---
 
+#### 7. 테스트 코드 실행 (선택)
+
+```bash
+npm run test
+```
+
 #### 7. Docker 컨테이너 종료 (선택)
 
 ```bash
